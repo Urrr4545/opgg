@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.urrr4545.opgg.presentation.MainViewModel" />
+
+        <variable
+            name="analysis"
+            type="com.urrr4545.opgg.domain.model.AnalysisData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="12dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="12dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_most"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.42" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.74" />
+
+        <TextView
+            android:id="@+id/tv_recent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            android:text="최근 20게임 분석"
+            app:layout_constraintTop_toTopOf="@id/gl_begin"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_recent_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:text="@{analysis.winLossStr}"
+            app:layout_constraintStart_toStartOf="@+id/tv_recent_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_title"
+            tools:text="11승 9패"/>
+
+        <LinearLayout
+            android:id="@+id/ll_recent_kda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_recent_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recent_score">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@{analysis.avgKills}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="  /  "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@{analysis.avgDeaths}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="  /  "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@{analysis.avgAssists}"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_recent_kda_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_recent_title"
+            app:layout_constraintTop_toBottomOf="@+id/ll_recent_kda"
+            app:layout_constraintBottom_toBottomOf="@id/gl_end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="@{analysis.avgKda}"
+                />
+
+            <TextView
+                android:id="@+id/tv_recent_kda_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginStart="5dp"
+                android:text="@{analysis.avgWinPer}"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_most_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="모스트 승률"
+            app:layout_constraintTop_toTopOf="@id/gl_begin"
+            app:layout_constraintStart_toStartOf="@id/gl_most"
+            app:layout_constraintEnd_toEndOf="@id/gl_position"
+            />
+
+        <ImageView
+            android:id="@+id/iv_most_champ1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:imgUrl="@{analysis.mostChamp1.imgUrl}"
+            app:isCircle="@{true}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_most_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_most_title"
+            app:layout_constraintEnd_toStartOf="@+id/iv_most_champ2"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+        <ImageView
+            android:id="@+id/iv_most_champ2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            app:imgUrl="@{analysis.mostChamp2.imgUrl}"
+            app:isCircle="@{true}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_most_title"
+            app:layout_constraintEnd_toEndOf="@+id/tv_most_title"
+            app:layout_constraintStart_toEndOf="@+id/iv_most_champ1"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+        <TextView
+            android:id="@+id/tv_most_champ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:text="@{analysis.mostChamp1.winPer}"
+            app:layout_constraintTop_toBottomOf="@+id/iv_most_champ1"
+            app:layout_constraintStart_toStartOf="@id/iv_most_champ1"
+            app:layout_constraintEnd_toEndOf="@id/iv_most_champ1"
+            tools:text="42%"
+            />
+
+        <TextView
+            android:id="@+id/tv_most_champ2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:text="@{analysis.mostChamp2.winPer}"
+            app:layout_constraintTop_toBottomOf="@+id/iv_most_champ2"
+            app:layout_constraintStart_toStartOf="@id/iv_most_champ2"
+            app:layout_constraintEnd_toEndOf="@id/iv_most_champ2"
+            tools:text="42%"
+            />
+
+        <TextView
+            android:id="@+id/tv_position_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginEnd="16dp"
+            android:text="포지션"
+            app:layout_constraintTop_toTopOf="@id/gl_begin"
+            app:layout_constraintStart_toStartOf="@id/gl_position"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/iv_position_most"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            app:imgPosStr="@{analysis.mostPos}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_position_title"
+            app:layout_constraintStart_toStartOf="@+id/tv_position_title"
+            app:layout_constraintEnd_toEndOf="@+id/tv_position_title"/>
+
+        <TextView
+            android:id="@+id/tv_position_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/black"
+            android:text="@{analysis.mostPosPer}"
+            app:layout_constraintTop_toBottomOf="@+id/iv_position_most"
+            app:layout_constraintStart_toStartOf="@id/iv_position_most"
+            app:layout_constraintEnd_toEndOf="@id/iv_position_most"
+            tools:text="42%"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

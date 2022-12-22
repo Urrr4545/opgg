@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="league"
+            type="com.urrr4545.opgg.domain.model.League"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="240dp"
+        android:layout_height="82dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="16dp"
+        android:background="#efefef">
+
+        <ImageView
+            android:id="@+id/iv_tier_img"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:imgUrl="@{league.tierRank.imageUrl}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/tv_tier_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{league.tierRank.name}"
+            app:layout_constraintTop_toTopOf="@+id/iv_tier_img"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tier_tier"
+            app:layout_constraintStart_toEndOf="@+id/iv_tier_img"/>
+
+        <TextView
+            android:id="@+id/tv_tier_tier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="2dp"
+            android:text="@{league.tierRank.tier}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tier_name"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tier_lp"
+            app:layout_constraintStart_toEndOf="@+id/iv_tier_img"
+            />
+
+        <TextView
+            android:id="@+id/tv_tier_lp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="2dp"
+            android:text="lp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tier_tier"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tier_score"
+            app:layout_constraintStart_toEndOf="@+id/iv_tier_img"
+            />
+
+        <TextView
+            android:id="@+id/tv_tier_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="2dp"
+            app:scoreRate="@{league}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tier_lp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_tier_img"
+            app:layout_constraintStart_toEndOf="@+id/iv_tier_img"/>
+
+        <RelativeLayout
+            android:id="@+id/btn_tier_more"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

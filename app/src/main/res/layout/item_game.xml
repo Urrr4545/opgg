@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="game"
+            type="com.urrr4545.opgg.domain.model.Game"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="16dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_game_info"
+            android:layout_width="40dp"
+            android:layout_height="104dp"
+            android:minHeight="104dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:isWin="@{game.win}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:isWin="@{game.win}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                app:gameLength="@{game.gameLength}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_champ_img"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            app:imgUrl="@{game.champion.imageUrl}"
+            app:isCircle="@{true}"
+            app:layout_constraintTop_toBottomOf="@+id/gl_begin"
+            app:layout_constraintStart_toEndOf="@id/ll_game_info"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:layout_marginBottom="-4dp"
+            android:background="@color/white"
+            app:opScoreBadge="@{game.stats.general.opScoreBadge}"
+            app:layout_constraintBottom_toBottomOf="@id/iv_champ_img"
+            app:layout_constraintStart_toStartOf="@id/iv_champ_img"
+            app:layout_constraintEnd_toEndOf="@id/iv_champ_img"/>
+
+        <ImageView
+            android:id="@+id/iv_spell1"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="2dp"
+            app:imgUrl="@{game.spells.get(0).imageUrl}"
+            app:layout_constraintTop_toTopOf="@+id/iv_champ_img"
+            app:layout_constraintStart_toEndOf="@id/iv_champ_img"
+            app:layout_constraintBottom_toTopOf="@+id/iv_spell2"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <ImageView
+            android:id="@+id/iv_spell2"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            app:imgUrl="@{game.spells.get(1).imageUrl}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_champ_img"
+            app:layout_constraintStart_toEndOf="@id/iv_champ_img"/>
+
+        <ImageView
+            android:id="@+id/iv_peak1"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginBottom="2dp"
+            app:imgUrl="@{game.peak.get(0)}"
+            app:isCircle="@{true}"
+            app:layout_constraintTop_toTopOf="@+id/iv_champ_img"
+            app:layout_constraintStart_toEndOf="@id/iv_spell2"
+            app:layout_constraintBottom_toTopOf="@+id/iv_spell2"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <ImageView
+            android:id="@+id/iv_peak2"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="2dp"
+            app:imgUrl="@{game.peak.get(1)}"
+            app:isCircle="@{true}"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_champ_img"
+            app:layout_constraintStart_toEndOf="@id/iv_spell2"/>
+
+        <TextView
+            android:id="@+id/tv_game_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{game.gameType}"
+            app:layout_constraintTop_toTopOf="@id/gl_begin"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="1dp"
+            app:createDate="@{game.createDate}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_game_type"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:largestMultiKillString="@{game.stats.general.largestMultiKillString}"
+            app:layout_constraintBottom_toBottomOf="@id/gl_end"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
